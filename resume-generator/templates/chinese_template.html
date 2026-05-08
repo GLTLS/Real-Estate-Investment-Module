@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{name}} - 简历</title>
+    <style>
+        :root {
+            --primary-color: #DB0011;
+            --secondary-color: #1A1A1A;
+            --accent-color: #0066CC;
+            --light-bg: #F8F9FA;
+            --border-color: #E0E0E0;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid var(--primary-color);
+        }
+        
+        .name {
+            font-size: 36px;
+            font-weight: bold;
+            color: var(--secondary-color);
+            margin: 0;
+        }
+        
+        .title {
+            font-size: 20px;
+            color: var(--primary-color);
+            margin: 5px 0 10px 0;
+        }
+        
+        .photo {
+            width: 130px;
+            height: 130px;
+            border-radius: 5px;
+            object-fit: cover;
+            border: 2px solid var(--border-color);
+        }
+        
+        .contact {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: var(--light-bg);
+            border-radius: 5px;
+        }
+        
+        .section {
+            margin-bottom: 25px;
+        }
+        
+        .section-title {
+            font-size: 22px;
+            color: var(--secondary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .job-match {
+            background: #e6f7ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border: 2px solid var(--accent-color);
+        }
+        
+        .job-match h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .skill-category {
+            background: white;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+        }
+        
+        .skill-category h4 {
+            margin: 0 0 10px 0;
+            color: var(--primary-color);
+        }
+        
+        .experience-item {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .company {
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+        
+        .position {
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+        
+        .duration {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .achievement {
+            background: #fff9e6;
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 3px solid #ffc107;
+            font-size: 14px;
+        }
+        
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 20px;
+        }
+        
+        .project-card {
+            background: white;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+        
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .project-title {
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+        
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 10px 0;
+        }
+        
+        .tech-tag {
+            background: var(--light-bg);
+            padding: 4px 8px;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+        
+        .certifications {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .cert {
+            background: var(--primary-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            text-align: center;
+        }
+        
+        .stat-box {
+            padding: 15px;
+            background: var(--light-bg);
+            border-radius: 5px;
+        }
+        
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>
+            <h1 class="name">{{name}}</h1>
+            <p class="title">{{title}}</p>
+            <p>{{subtitle}}</p>
+        </div>
+        <img src="{{photoPath}}" alt="个人照片" class="photo">
+    </div>
+    
+    <div class="contact">
+        <div>📍 {{location}}</div>
+        <div>📧 {{email}}</div>
+        <div>📱 {{phone}}</div>
+        <div>🔗 {{linkedin}}</div>
+    </div>
+    
+    {{#if jobAnalysis}}
+    <div class="job-match">
+        <h3>🎯 完美匹配{{jobAnalysis.industry}}{{jobAnalysis.positionLevel}}职位</h3>
+        <p><strong>为什么我是理想候选人:</strong> {{jobMatchStatement}}</p>
+        <p><strong>匹配的关键要求:</strong></p>
+        <ul>
+            {{#each jobAnalysis.keyRequirements}}
+            <li>{{this}}</li>
+            {{/each}}
+        </ul>
+    </div>
+    {{/if}}
+    
+    <div class="section">
+        <h2 class="section-title">专业概述</h2>
+        <p>{{summary}}</p>
+    </div>
+    
+    <div class="section">
+        <h2 class="section-title">技术技能</h2>
+        <div class="skills-grid">
+            {{#each skills}}
+            <div class="skill-category">
+                <h4>{{category}}</h4>
+                {{#each items}}
+                <div>{{this}}</div>
+                {{/each}}
+            </div>
+            {{/each}}
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2 class="section-title">工作经历</h2>
+        {{#each workExperience}}
+        <div class="experience-item">
+            <div class="job-header">
+                <div>
+                    <div class="company">{{company}}</div>
+                    <div class="position">{{position}}</div>
+                </div>
+                <div class="duration">{{duration}}</div>
+            </div>
+            <ul>
+                {{#each responsibilities}}
+                <li>{{this}}</li>
+                {{/each}}
+            </ul>
+            {{#if achievement}}
+            <div class="achievement">
+                <strong>主要成就:</strong> {{achievement}}
+            </div>
+            {{/if}}
+        </div>
+        {{/each}}
+    </div>
+    
+    <div class="section">
+        <h2 class="section-title">项目经历</h2>
+        <div class="project-grid">
+            {{#each projects}}
+            <div class="project-card">
+                <div class="project-header">
+                    <div>
+                        <div class="project-title">{{title}}</div>
+                        <div class="position">{{role}}</div>
+                    </div>
+                    <div class="duration">{{duration}}</div>
+                </div>
+                <p>{{description}}</p>
+                {{#if techStack}}
+                <div class="tech-tags">
+                    {{#each techStack}}
+                    <span class="tech-tag">{{this}}</span>
+                    {{/each}}
+                </div>
+                {{/if}}
+                {{#if results}}
+                <div class="achievement">
+                    <strong>成果:</strong> {{results}}
+                </div>
+                {{/if}}
+            </div>
+            {{/each}}
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2 class="section-title">专业认证</h2>
+        <div class="certifications">
+            {{#each certifications}}
+            <div class="cert">{{this}}</div>
+            {{/each}}
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2 class="section-title">教育背景与语言能力</h2>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div>
+                <h4 style="margin: 0 0 10px 0; color: var(--primary-color);">教育背景</h4>
+                {{#each education}}
+                <div><strong>{{degree}}</strong></div>
+                <div>{{institution}}</div>
+                <div style="color: #666; font-size: 14px;">{{year}}</div>
+                {{/each}}
+            </div>
+            <div>
+                <h4 style="margin: 0 0 10px 0; color: var(--primary-color);">语言能力</h4>
+                {{#each languages}}
+                <div><strong>{{language}}:</strong> {{level}}</div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2 class="section-title">量化成就</h2>
+        <div class="stats">
+            <div class="stat-box">
+                <div class="stat-number">{{achievements.years}}+</div>
+                <div>年工作经验</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">{{achievements.efficiency}}%</div>
+                <div>效率提升</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">{{achievements.team}}+</div>
+                <div>团队成员领导</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">{{achievements.projects}}+</div>
+                <div>主要项目</div>
+            </div>
+        </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border-color); color: #666; font-size: 14px;">
+        由简历生成技能生成 | 针对{{jobAnalysis.industry}}职位优化 | {{availability}}
+    </div>
+</body>
+</html>
